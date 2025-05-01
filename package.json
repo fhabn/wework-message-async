@@ -1,0 +1,28 @@
+{
+	"name": "wework-message-async",
+	"version": "1.0.0",
+	"description": "WeWorkFinanceSdk node c++ addon",
+	"main": "index.js",
+	"gypfile": true,
+	"author": "YangLin",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Garfield-yin/wework-chat-node.git"
+	},
+	"keywords": [
+		"WeWorkFinanceSdk",
+		"get Chat data"
+	],
+	"license": "MIT",
+	"scripts": {
+		"prebenchmark": "node-gyp build",
+		"pretest-server": "node-gyp build"
+	},
+	"engines": {
+		"node": ">=16.0.0"
+	},
+	"dependencies": {
+		"bindings": "~1.2.1",
+		"node-addon-api": "^6.0.0"
+	}
+}
