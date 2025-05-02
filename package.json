@@ -7,7 +7,7 @@
 	"author": "YangLin",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/Garfield-yin/wework-chat-node.git"
+		"url": "https://github.com/fhabn/wework-message-async.git"
 	},
 	"keywords": [
 		"WeWorkFinanceSdk",

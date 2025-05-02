@@ -1,6 +1,9 @@
 # wework-message-async
-本项目改写自：https://github.com/Garfield-yin/wework-chat-node (感谢原作者)
-由于原项目包长时间未维护，故重新修改立项，以支持 node.js 18+ 以上 目前测试至 node v22 可以正常使用；同时修复了部分bug,更新了最新的企业微信 C语言 SDK v3.0 （2025-2-13）。
+https://github.com/fhabn/wework-message-async
+(本项目改写自：Garfield-yin/wework-chat-node 感谢原作者)
+
+由于原项目包长时间未维护，故重新修改立项，支持了 node.js 18+ 以上 目前测试至 node v22 可以正常使用；
+同时修复了部分bug,更新了最新的企业微信 C语言 SDK v3.0 （2025-2-13）。
 后续如果需要升级企业微信 SDK（当企微SDK有更新时：https://developer.work.weixin.qq.com/document/path/91774）,请更新 lib/libWeWorkFinanceSdk_C.so 以及 include/wework/WeWorkFinanceSdk_C.h （wget https://sdk文件下载路径   解压缩后手动替换相应文件），文件替换后再 build （npm rebuild）。
 本模块也会持续更新优化。
 使用中遇到问题，欢迎提交 issue。
