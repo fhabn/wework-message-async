@@ -5,9 +5,10 @@
 	"main": "index.js",
 	"gypfile": true,
 	"author": "YangLin",
+	"homepage": "https://binguo.me",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/fhabn/wework-message-async.git"
+		"url": "git+https://github.com/fhabn/wework-message-async.git"
 	},
 	"keywords": [
 		"WeWorkFinanceSdk",
