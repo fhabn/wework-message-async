@@ -1,9 +1,10 @@
 # wework-message-async
-本项目改写自：
-https://github.com/Garfield-yin/wework-chat-node
-由于原项目长时间未更新，故重新封装，以支持 node.js 18 ~ 22+；同时修复了部分bug,更新了最新的企业微信 C语言 SDK v3.0 （2025-2-13）。
-如果需要升级企业微信 SDK,请更新 lib/libWeWorkFinanceSdk_C.so 以及 include/wework/WeWorkFinanceSdk_C.h，文件更新后再 build （npm rebuild）。
+本项目改写自：https://github.com/Garfield-yin/wework-chat-node (感谢原作者)
+由于原项目包长时间未维护，故重新修改立项，以支持 node.js 18+ 以上 目前测试至 node v22 可以正常使用；同时修复了部分bug,更新了最新的企业微信 C语言 SDK v3.0 （2025-2-13）。
+后续如果需要升级企业微信 SDK（当企微SDK有更新时：https://developer.work.weixin.qq.com/document/path/91774）,请更新 lib/libWeWorkFinanceSdk_C.so 以及 include/wework/WeWorkFinanceSdk_C.h （wget https://sdk文件下载路径   解压缩后手动替换相应文件），文件替换后再 build （npm rebuild）。
 本模块也会持续更新优化。
+使用中遇到问题，欢迎提交 issue。
+也可微信联系我：realyanglin
 ##### Compiling
 
 由于企业微信提供的 sdk 仅支持 linux 与 windows,在 OS X 下可编译成功，但无法正常使用。
@@ -49,6 +50,7 @@ const wework = new WeWorkChat({
 	seq: 0,
 });
 
+// 获取媒体文件
 const getMediaData = (
 	fileName: string,
 	params: GetMediaDataParams,
@@ -67,6 +69,8 @@ const getMediaData = (
 		fs.createWriteStream(fileName).write(bufVal);
 	}
 };
+
+// 获取会话数据
 const test = () => {
 	const params: GetDataParams = {
 		max_results: 10,
@@ -77,8 +81,8 @@ const test = () => {
 	console.log(ret.last_seq);
 	for (const msg of ret.data) {
 		if (!msg) continue;
-		const msgData: ChatDataItem = JSON.parse(msg);
-		if (msgData.msgtype != "file") continue;
+		const msgData: ChatDataItem = JSON.parse(msg); //解析消息JSON
+		if (msgData.msgtype != "file") continue; //根据消息类型判断
 		if (msgData.file && msgData.file.fileext != "pptx") continue;
 		const fileInfo = msgData.file;
 		if (!fileInfo) continue;
@@ -89,7 +93,7 @@ const test = () => {
 	}
 };
 
-test();
+test(); //执行
 ```
 
 ### TO DO
