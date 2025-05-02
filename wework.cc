@@ -78,7 +78,7 @@ static const char reverse_table[128] = {
    41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 64, 64, 64, 64, 64
 };
 
-const int max_results = 1000; // 默认一次最多拉取1000条数据
+int max_results = 1000; // 默认一次最多拉取1000条数据
 
 Napi::Object WeWorkChat::Init(Napi::Env env, Napi::Object exports) {
   Napi::Function func =
