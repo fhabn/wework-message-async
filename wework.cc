@@ -158,8 +158,7 @@ Napi::Value WeWorkChat::GetChat(const Napi::CallbackInfo& info){
 
     Napi::Object obj = info[0].As<Napi::Object>();
    
-    std::int64_t max_num = obj.Get("max_results").ToNumber();
-    if(!max_num) max_results = max_num;
+    std::int64_t max_results = obj.Get("max_results").ToNumber();
     std::int64_t seq = obj.Get("seq").ToNumber();
     std::int64_t timeout = obj.Get("timeout").ToNumber();
     if (!seq) seq= 0;
