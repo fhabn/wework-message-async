@@ -222,6 +222,11 @@ Napi::Value WeWorkChat::GetChat(const Napi::CallbackInfo& info){
     }
     for (SizeType i = 0; i < dataSize; ++i)
     {
+        // 如果大于last_seq
+        if (chatData[i]["seq"].GetInt64() > last_seq){
+            // 赋值给last_seq
+            last_seq =chatData[i]["seq"].GetInt64();
+        }
         //cout << "current seq:" <<chatData[i]["seq"].GetInt64()<<endl;
         string encryptRandomKey = chatData[i]["encrypt_random_key"].GetString();
         //cout << "encrypt_random_key: " << encryptRandomKey << endl;
