@@ -24,6 +24,12 @@ npm install wework-message-async
 
 3.使用示例
 注意私钥格式，经常因为格式问题出错，私钥中间部分中间不要有换行，否则会解密失败
+
+4.常见问题
+关于seq，因为企微只能获取最近5天的消息，比如今天是10月5日，传0时即代表获取的是倒推5天的第一条消息（相对的），后续再获取的话就可以根据返回的最大seq来作为起始位置（绝对的），所以首次获取都会先用0作为起始位置，后续再获取时传入上次返回的last_seq即可。
+
+关于私钥private_key，如果你设置的公钥版本只有1个，只要配置好对应的私钥用来解密即可，经常出问题的是存在多个版本的密钥时，比如设置过3个密钥，企微后台最新的公钥版本是3，你可能以为私钥也设置最新的就可以了，但获取消息记录的时候，加密的消息有个字段是公钥版本号publickey_ver ，你必须用对应的私钥才能正确解密 比如是3就用3对应的私钥 是1就要用1对应的私钥，除非你不考虑获取以前的消息了 只获取从设置最新密钥后的消息的话可以不用管它，但你需要先知道起始seq,否则就要等5天后再从seq:0 获取起始位置。
+当然本模块暂时还未支持多个版本私钥的配置，后续会支持。
 ### Example
 
 ```javascript
@@ -79,7 +85,7 @@ const test = () => {
 		seq: 0,
 	};
 	const ret = wework.getChatData(params);
-	console.log(ret.last_seq);
+	console.log(ret.last_seq); //获取最后一条消息的seq 应保存起来下次可以传入从此开始获取 入库时建议根据msgid作唯一性检查
 	for (const msg of ret.data) {
 		if (!msg) continue;
 		const msgData: ChatDataItem = JSON.parse(msg); //解析消息JSON
