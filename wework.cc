@@ -25,6 +25,7 @@
 #include <openssl/evp.h>
 #include <openssl/bn.h>
 #include <openssl/pem.h>
+#include <nlohmann/json.hpp>
 
 #include "include/wework/wework.h"
 
@@ -250,7 +251,18 @@ Napi::Value WeWorkChat::GetChat(const Napi::CallbackInfo& info){
   
         
         char *msg_data = GetContentFromSlice(slice_msg);
-        data_array[i] = Napi::String::New(info.Env(), msg_data);
+
+        // 将 msg_data 转换为 JSON 对象
+        nlohmann::json json_obj = nlohmann::json::parse(msg_data);
+        // 追加 seq 属性
+        json_obj["seq"] = chatData[i]["seq"].GetInt32();
+        // 将 JSON 对象序列化回字符串
+        std::string updated_msg_data = json_obj.dump();
+        // 将序列化后的字符串存入 data_array[i]
+        data_array[i] = Napi::String::New(info.Env(), updated_msg_data.c_str());
+
+
+        // data_array[i] = Napi::String::New(info.Env(), msg_data);
         FreeSlice(slice_msg);
     }
     retObj.Set("last_seq", Napi::Number::New(env,last_seq));
