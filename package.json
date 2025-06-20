@@ -1,6 +1,6 @@
 {
 	"name": "wework-message-async",
-	"version": "1.0.10",
+	"version": "1.0.11",
 	"description": "WeWorkFinanceSdk node c++ addon",
 	"main": "index.js",
 	"gypfile": true,
